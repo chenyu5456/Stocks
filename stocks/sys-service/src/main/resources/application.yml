@@ -1,0 +1,32 @@
+## 禁用默认错误处理页面
+#server:
+#  error:
+#    whitelabel:
+#      enabled: false
+
+# 配置druid数据库连接池
+spring:
+  druid:
+    borrowConnectionTimeout: 30000
+    maxActive: 20
+    maxWait: 10000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 3
+    timeBetweenEvictionRunsMillis: 60000
+    validationQuery: SELECT 'x' # 解决mysql8小时问题
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.107.133.173:3306/test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    password: root
+    username: root
+
+mapper:
+  not-empty: true
+  identity: MYSQL
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+logging:
+  level:
+    com.stocks.sysservice.mapper: debug
